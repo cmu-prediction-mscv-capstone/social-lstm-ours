@@ -11,7 +11,7 @@ class DataLoader():
         self.gr_vsp_file=gr_vsp_file
         self.video_path=video_path
         #self.batch_size=batch_size
-        #self.seq_length=seq_length
+        #self.seq_length=seq_length   
         self.forcePreProcess=forcePreProcess
         self.preprocessed_path=os.path.join(os.path.dirname(gr_vsp_file),os.path.basename(gr_vsp_file).split('.')[0])+"_interp.npz"
         self.frames_path=os.path.join(os.path.dirname(video_path),os.path.basename(video_path).split('.')[0])

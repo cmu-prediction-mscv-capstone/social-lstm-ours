@@ -3,9 +3,9 @@ import numpy as np
 from utils import DataLoader
 import cv2
 import matplotlib.pyplot as plt
-gr_vsp_file='/Users/nitin/Documents/cmu_vision/sem2/capstone/codes_local/social-lstm-ours/social-lstm/data/crowds_zara01.vsp'
-video_path='/Users/nitin/Documents/cmu_vision/sem2/capstone/codes_local/social-lstm-ours/social-lstm/data/crowds_zara01.avi'
-dataloader=DataLoader(gr_vsp_file=gr_vsp_file,video_path=video_path,batch_size=1,seq_length=3,pred_length=10)
+gr_vsp_file=os.path.join(os.getcwd(),'data/crowds_zara01.vsp')
+video_path=os.path.join(os.getcwd(),'data/crowds_zara01.avi')
+#dataloader=DataLoader(gr_vsp_file=gr_vsp_file,video_path=video_path,batch_size=1,seq_length=3,pred_length=10)
 all_color=np.random.rand(200,3)
 
 def plot(x,y,y_pred):
@@ -51,8 +51,12 @@ def plot(x,y,y_pred):
     for index in range(dataloader.batch_size):
         y_pred=np.zeros(6)
         plot(x[index],y[index],y_pred)'''
-
-dataloader=DataLoader(gr_vsp_file=gr_vsp_file,video_path=video_path,batch_size=1,seq_length=3,pred_length=3)
+frames_path=os.path.join(os.path.dirname(video_path),os.path.basename(video_path).split('.')[0])
+#print(frames_path)
+if os.path.exists(frames_path):
+    dataloader=DataLoader(gr_vsp_file=gr_vsp_file,video_path=video_path,batch_size=1,seq_length=3,pred_length=3)
+else:
+    dataloader=DataLoader(gr_vsp_file=gr_vsp_file,video_path=video_path,batch_size=1,seq_length=3,pred_length=3,forcePreProcess=True)
 error=0
 count=0
 while(dataloader.epoch==0):
